@@ -1,0 +1,44 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>New Tab</title>
+<style>
+body{
+    background-color:var(--background-color, #000);
+    display:flex;
+    justify-content: end;
+    align-items: end;
+}
+</style>
+<input type="color" id="picker" value="#43464e">
+<script>
+    const KEY = "background-color";
+    const picker = document.getElementById('picker')
+
+    function getSavedBackgroundColor() {
+        return localStorage.getItem(KEY)
+    }
+
+    function saveBackgroundColor(color) {
+        localStorage.setItem(KEY, color)
+    }
+
+    function setBackgroundColorVariable(color) {
+        document.body.style.setProperty('--background-color', color)
+    }
+
+    addEventListener('storage', ({ key, newValue }) => {
+        if (key === KEY) {
+            setBackgroundColorVariable(newValue)
+        }
+    })
+
+    picker.addEventListener('input', (event) => {
+        setBackgroundColorVariable(event.target.value)
+    })
+
+    picker.addEventListener('change', (event) => {
+        saveBackgroundColor(event.target.value)
+    })
+
+    setBackgroundColorVariable(getSavedBackgroundColor())
+</script>
