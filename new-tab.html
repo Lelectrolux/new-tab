@@ -10,21 +10,27 @@ body{
 }
 </style>
 <input type="color" id="picker" value="#43464e">
-<script>
+<script >
     const KEY = "background-color";
     const picker = document.getElementById('picker')
 
-    function getSavedBackgroundColor() {
-        return chrome.storage.local.getItem(KEY)
+    async function getSavedBackgroundColor() {
+        return await chrome.storage.sync.get(KEY)
     }
 
-    function saveBackgroundColor(color) {
-        chrome.storage.local.setItem(KEY, color)
+    async function saveBackgroundColor(color) {
+        await chrome.storage.sync.get({ [KEY]: color })
     }
 
     function setBackgroundColorVariable(color) {
         document.body.style.setProperty('--background-color', color)
     }
+
+    chrome.storage.onChanged.addListener((changes, area) => {
+        if (area === 'sync' && changes[KEY]) {
+            setBackgroundColorVariable(changes[KEY].newValue)
+        }
+    });
 
     addEventListener('storage', ({ key, newValue }) => {
         if (key === KEY) {
