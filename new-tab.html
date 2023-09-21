@@ -15,11 +15,11 @@ body{
     const picker = document.getElementById('picker')
 
     function getSavedBackgroundColor() {
-        return localStorage.getItem(KEY)
+        return chrome.storage.local.getItem(KEY)
     }
 
     function saveBackgroundColor(color) {
-        localStorage.setItem(KEY, color)
+        chrome.storage.local.setItem(KEY, color)
     }
 
     function setBackgroundColorVariable(color) {
