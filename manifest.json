@@ -1,0 +1,9 @@
+{
+    "name": "new-tab",
+    "version": "0.0.0.1",
+    "manifest_version": 3,
+    "description": "Custom new tab extension.",
+    "icons": {
+        "128": "icon.png"
+    }
+}
