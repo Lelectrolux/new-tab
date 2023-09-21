@@ -5,5 +5,9 @@
     "description": "Custom new tab extension.",
     "icons": {
         "128": "icon.png"
+    },
+    "incognito": "split",
+    "chrome_url_overrides": {
+        "newtab": "new-tab.html"
     }
 }
